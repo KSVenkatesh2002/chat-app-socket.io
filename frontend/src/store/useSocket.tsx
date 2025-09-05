@@ -17,7 +17,7 @@ interface SocketStore {
   onlineGroups: group[];
 
   setMyName: (data: string) => void;
-  connectSocket: () => void;
+  connectSocket: (data: string) => void;
   disconnectSocket: () => void;
   createGroup: (selectedGroupName: string) => void;
   addToGroup: (groupName: string, notJoined: boolean) => void;
@@ -31,12 +31,12 @@ export const useSocket = create<SocketStore>((set, get) => ({
   onlineGroups: [],
 
   setMyName: (data) => {
-    set({ userName: data });
+
     // toast.success(`Your user name is ${get().userName}`)
-    get().connectSocket();
+    get().connectSocket(data);
   },
 
-  connectSocket: async () => {
+  connectSocket: async (data) => {
     if (get().socket?.connected) return;
 
     const socket = io(BASE_URL, {
@@ -48,8 +48,12 @@ export const useSocket = create<SocketStore>((set, get) => ({
     });
 
     socket.connect();
+    socket.on("connect_error", (err) => {
+      console.error("Socket connect error:", err.message);
+    });
 
     socket.on("connect", () => {
+      set({ userName: data });
       toast.success("Connected");
       set({ socket });
       const { subscribeToMessages, unsubscribeFromMessages } = useChatStore.getState()
@@ -78,6 +82,7 @@ export const useSocket = create<SocketStore>((set, get) => ({
     })
 
     socket.on("disconnect", () => {
+      set({ userName: '' });
       set({ socket: null });
     });
   },
@@ -86,6 +91,7 @@ export const useSocket = create<SocketStore>((set, get) => ({
     const socket = get().socket;
     if (socket?.connected) {
       socket.disconnect();
+      set({ userName: '' });
       set({ socket: null });
     }
   },
