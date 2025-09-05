@@ -3,7 +3,9 @@ import { io, Socket } from "socket.io-client";
 import toast from "react-hot-toast";
 import { useChatStore } from "./useChatStore";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = import.meta.env.MODE === "development"
+  ? "http://localhost:3000"
+  : "https://venkatesh-realtime-chat-app.onrender.com";
 
 type group = {
   groupName: string;
