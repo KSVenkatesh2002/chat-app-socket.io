@@ -13,8 +13,9 @@ const ChatPage = () => {
       <div className="h-[calc(100vh-64px)] flex flex-col justify-center items-center bg-accent">
         <MessageSquare className='animate-bounce size-10 text-gray-700' />
         <h1 className='pt-7 text-gray-600 text-2xl font-bold '>Welcome To Chat App</h1>
-        <span className="pt-4  text-gray-500 text-md">
-          Pick your chat partner from sidebar and start messaging!
+        <span className="pt-4 text-center text-gray-500 text-md">
+          Pick your chat partner from sidebar <br />
+          start messaging!
         </span>
       </div>)
   return (

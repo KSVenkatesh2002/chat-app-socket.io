@@ -22,10 +22,10 @@ const HomePage = () => {
         />
         <form onSubmit={handleNameSubmit} className='flex flex-col justify-center items-center gap-2'>
           <label htmlFor="username" className="text-5xl font-bold">
-            Enter your user name
+            Choose your secret identity
           </label>
-          <span className="py-6">
-            This is just for identifier, provide this to your friend to chat with your bodies
+          <span className="py-6 text-center">
+            This is how your buddies will spot you. Batman is already taken 🦇
           </span>
           <input
             type="text"

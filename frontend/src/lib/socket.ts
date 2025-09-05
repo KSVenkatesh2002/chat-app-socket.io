@@ -1,7 +1,10 @@
 // lib/socket.ts
 import { io, Socket } from "socket.io-client";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = import.meta.env.MODE === "development"
+  ? "http://localhost:3000"
+  : "https://venkatesh-realtime-chat-app.onrender.com";
+
 
 // Store socket on the global object (safe across hot reloads)
 let socket: Socket;
