@@ -43,7 +43,7 @@ export const useSocket = create<SocketStore>((set, get) => ({
 
     const socket = io(BASE_URL, {
       query: {
-        userName: get().userName,
+        userName: data,
       },
       transports: ["websocket"],
       autoConnect: false,
